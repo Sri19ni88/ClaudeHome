@@ -1,7 +1,6 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
-import multer from 'multer';
 import recipesRouter from './routes/recipes.js';
 
 dotenv.config({ path: '../.env' });
@@ -16,12 +15,7 @@ app.use(cors({
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 
-// Configure multer for file uploads
-const storage = multer.memoryStorage();
-export const upload = multer({
-  storage,
-  limits: { fileSize: 10 * 1024 * 1024 } // 10MB limit
-});
+// Multer configuration is handled in routes file
 
 // Routes
 app.use('/api/recipes', recipesRouter);

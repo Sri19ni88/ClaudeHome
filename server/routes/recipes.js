@@ -1,8 +1,15 @@
 import express from 'express';
-import { upload } from '../server.js';
+import multer from 'multer';
 import { identifyFridgeItems, generateRecipes } from '../services/claudeService.js';
 
 const router = express.Router();
+
+// Configure multer for file uploads
+const storage = multer.memoryStorage();
+const upload = multer({
+  storage,
+  limits: { fileSize: 10 * 1024 * 1024 } // 10MB limit
+});
 
 /**
  * POST /api/recipes/analyze
